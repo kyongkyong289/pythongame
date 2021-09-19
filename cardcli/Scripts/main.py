@@ -8,6 +8,7 @@ import variables as var
 
 import title
 import menu
+import field
 
 var.screen = curses.initscr() 
 
@@ -27,6 +28,9 @@ def display():
     elif var.Game.scene == 'menu':
         menu.display()
 
+    elif var.Game.scene == 'field':
+        field.display()
+
     var.window.refresh()
 
 def input_handle():
@@ -40,6 +44,9 @@ def input_handle():
 
     elif var.Game.scene == 'menu':
         menu.input_handle(key)
+
+    elif var.Game.scene == 'field':
+        field.input_handle(key)
 
 def curses_settings():
     var.window = curses.newwin(30, 96, 0, 0)

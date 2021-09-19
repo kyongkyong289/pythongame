@@ -14,7 +14,8 @@ def display():
 
 def input_handle(key):
     if key == 96 + 5:
-        pass
+        if var.Cursor.menu == 0:
+            var.Game.scene = 'field'
 
     elif key == 96 + 23 and var.Cursor.menu > 0:
         var.Cursor.menu -= 1
