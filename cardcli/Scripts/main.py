@@ -7,6 +7,7 @@ import colors
 import variables as var
 
 import title
+import menu
 
 var.screen = curses.initscr() 
 
@@ -23,6 +24,9 @@ def display():
     if var.Game.scene == 'title':
         title.display()
 
+    elif var.Game.scene == 'menu':
+        menu.display()
+
     var.window.refresh()
 
 def input_handle():
@@ -30,6 +34,12 @@ def input_handle():
     
     if key == 27:
         sys.exit()
+
+    elif var.Game.scene == 'title':
+        title.input_handle(key)
+
+    elif var.Game.scene == 'menu':
+        menu.input_handle(key)
 
 def curses_settings():
     var.window = curses.newwin(30, 96, 0, 0)
@@ -48,7 +58,7 @@ def curses_settings():
 
 def color_init():
     for i in range(1, 17):
-        curses.init_pair(i, i - 1, 0)
+        curses.init_pair(i, i - 1, -1)
 
     if platform.system() == 'Windows':
         colors.fg_black = 1
