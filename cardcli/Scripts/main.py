@@ -1,7 +1,10 @@
 import curses
-import variables as var
 import sys
 import traceback
+import platform
+
+import colors
+import variables as var
 
 import title
 
@@ -41,8 +44,47 @@ def curses_settings():
 
     var.window.timeout(25)
 
-    for i in range(1, 16):
-        curses.init_pair(i, i, 0)
+    color_init()
+
+def color_init():
+    for i in range(1, 17):
+        curses.init_pair(i, i - 1, 0)
+
+    if platform.system() == 'Windows':
+        colors.fg_black = 1
+        colors.fg_red = 5
+        colors.fg_yellow = 7
+        colors.fg_green = 3
+        colors.fg_cyan = 4
+        colors.fg_blue = 2
+        colors.fg_magenta = 6
+        colors.fg_white = 8
+        colors.fg_lblack = 9
+        colors.fg_lred = 13
+        colors.fg_lyellow = 15
+        colors.fg_lgreen = 11
+        colors.fg_lcyan = 12
+        colors.fg_lblue = 10
+        colors.fg_lmagenta = 14
+        colors.fg_lwhite = 16
+
+    else:
+        colors.fg_black = 1
+        colors.fg_red = 2
+        colors.fg_yellow = 4
+        colors.fg_green = 3
+        colors.fg_cyan = 7
+        colors.fg_blue = 5
+        colors.fg_magenta = 6
+        colors.fg_white = 8
+        colors.fg_lblack = 9
+        colors.fg_lred = 10
+        colors.fg_lyellow = 12
+        colors.fg_lgreen = 11
+        colors.fg_lcyan = 15
+        colors.fg_lblue = 13
+        colors.fg_lmagenta = 14
+        colors.fg_lwhite = 16
 
 try:
     init()

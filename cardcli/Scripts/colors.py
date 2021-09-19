@@ -1,0 +1,16 @@
+fg_black = None
+fg_red = None
+fg_yellow = None
+fg_green = None
+fg_cyan = None
+fg_blue = None
+fg_magenta = None
+fg_white = None
+fg_lblack = None
+fg_lred = None
+fg_lyellow = None
+fg_lgreen = None
+fg_lcyan = None
+fg_lblue = None
+fg_lmagenta = None
+fg_lwhite = None
