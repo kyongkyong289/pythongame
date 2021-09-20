@@ -1,5 +1,5 @@
 class Main():
-    title_text = [2, 2]
+    title_text = [1, 2]
 
 class Menu():
     new_game = [4, 4]
@@ -7,3 +7,7 @@ class Menu():
     dungeon = [8, 4]
 
     cursor = [[4, 2], [6, 2], [8, 2]]
+
+class Field():
+    cell_size = [5, 6]
+    cell_interval = [4, 5]
