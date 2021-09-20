@@ -1,5 +1,6 @@
 class Main():
     title_text = [1, 2]
+    dialogue = [21, 2, 7, 92]
 
 class Menu():
     new_game = [4, 4]

@@ -111,5 +111,6 @@ try:
 
 except:
     curses.endwin()
+    print(var.Game.state)
     traceback.print_exc()
     sys.exit()

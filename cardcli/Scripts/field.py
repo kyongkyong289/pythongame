@@ -29,6 +29,9 @@ def display():
             draw_objects(r, c, field.objects[var.Field.location][i][2])
 
     draw_player(UI.Field.cell_interval[0] * var.Field.player_position[0] - var.Camera.position[0], UI.Field.cell_interval[1] * var.Field.player_position[1] - var.Camera.position[1])
+
+    if var.Game.state == 'dialogue':
+        func.draw_rect(UI.Main.dialogue[0], UI.Main.dialogue[1], UI.Main.dialogue[2], UI.Main.dialogue[3], colors.fg_white)
     
 def draw_terrain(r, c, terrain): 
     func.draw_rect(r, c, UI.Field.cell_size[0], UI.Field.cell_size[1], colors.fg_white)
@@ -56,25 +59,48 @@ def draw_player(r, c):
     var.window.addstr(r + 3, c + 2, '--')
 
 def input_handle(key):
-    if key == 96 + 23 and field.walls[var.Field.location][var.Field.player_position[0] - 1][var.Field.player_position[1]] == 0:
-        var.Field.player_position[0] -= 1
-        var.Camera.position[0] -= UI.Field.cell_interval[0]
+    if var.Game.state == '':
+        if key == 96 + 23 and field.walls[var.Field.location][var.Field.player_position[0] - 1][var.Field.player_position[1]] == 0:
+            var.Field.player_position[0] -= 1
+            var.Camera.position[0] -= UI.Field.cell_interval[0]
+            var.Field.player_face = 'U'
 
-    elif key == 96 + 19 and field.walls[var.Field.location][var.Field.player_position[0] + 1][var.Field.player_position[1]] == 0:
-        var.Field.player_position[0] += 1
-        var.Camera.position[0] += UI.Field.cell_interval[0]
+        elif key == 96 + 19 and field.walls[var.Field.location][var.Field.player_position[0] + 1][var.Field.player_position[1]] == 0:
+            var.Field.player_position[0] += 1
+            var.Camera.position[0] += UI.Field.cell_interval[0]
+            var.Field.player_face = 'D'
 
-    elif key == 96 + 1 and field.walls[var.Field.location][var.Field.player_position[0]][var.Field.player_position[1] - 1] == 0:
-        var.Field.player_position[1] -= 1
-        var.Camera.position[1] -= UI.Field.cell_interval[1]
+        elif key == 96 + 1 and field.walls[var.Field.location][var.Field.player_position[0]][var.Field.player_position[1] - 1] == 0:
+            var.Field.player_position[1] -= 1
+            var.Camera.position[1] -= UI.Field.cell_interval[1]
+            var.Field.player_face = 'L'
 
-    elif key == 96 + 4 and field.walls[var.Field.location][var.Field.player_position[0]][var.Field.player_position[1] + 1] == 0:
-        var.Field.player_position[1] += 1
-        var.Camera.position[1] += UI.Field.cell_interval[1]
+        elif key == 96 + 4 and field.walls[var.Field.location][var.Field.player_position[0]][var.Field.player_position[1] + 1] == 0:
+            var.Field.player_position[1] += 1
+            var.Camera.position[1] += UI.Field.cell_interval[1]
+            var.Field.player_face = 'R'
 
-    elif key == 96 + 5:
-        for i in range(len(field.connection[var.Field.location])):
-            if var.Field.player_position[0] == field.connection[var.Field.location][i][0][0] and var.Field.player_position[1] == field.connection[var.Field.location][i][0][1]:
-                var.Field.player_position = [field.connection[var.Field.location][i][2][0], field.connection[var.Field.location][i][2][1]]
-                var.Camera.position = [field.connection[var.Field.location][i][3][0], field.connection[var.Field.location][i][3][1]]
-                var.Field.location = field.connection[var.Field.location][i][1]
+        elif key == 96 + 5:
+            for i in range(len(field.connection[var.Field.location])):
+                if var.Field.player_position[0] == field.connection[var.Field.location][i][0][0] and var.Field.player_position[1] == field.connection[var.Field.location][i][0][1]:
+                    var.Field.player_position = [field.connection[var.Field.location][i][2][0], field.connection[var.Field.location][i][2][1]]
+                    var.Camera.position = [field.connection[var.Field.location][i][3][0], field.connection[var.Field.location][i][3][1]]
+                    var.Field.location = field.connection[var.Field.location][i][1]
+
+        elif key == 96 + 18:
+            for i in range(len(field.interaction[var.Field.location])):
+                for j in range(4):
+                    if var.Field.player_position[0] == field.interaction[var.Field.location][i][j][0] and var.Field.player_position[1] == field.interaction[var.Field.location][i][j][1] and var.Field.player_face == field.interaction[var.Field.location][i][j][2]:
+                        var.Game.state = 'dialogue'
+                        var.Game.interaction = field.interaction[var.Field.location][i][4]
+    
+    elif var.Game.state == 'dialogue':
+        pass
+        
+def neighbor(pos1, pos2):
+    if abs(pos1[0] - pos2[0]) == 0 and abs(pos1[1] - pos2[1]) == 1:
+        return True
+    if abs(pos1[0] - pos2[0]) == 1 and abs(pos1[1] - pos2[1]) == 0:
+        return True
+    
+    return False
