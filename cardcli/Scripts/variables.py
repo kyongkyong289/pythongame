@@ -5,6 +5,7 @@ class Game():
     scene = 'title'
     state = ''
     interaction = -1
+    interaction_level = -1
 
 class Cursor():
     menu = 0
@@ -17,3 +18,12 @@ class Field():
 
     player_position = [1, 1]
     player_face = 'D'
+
+class Player():
+    pass
+
+class Player_Battle():
+    pass
+
+class Battle():
+    pass

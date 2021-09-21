@@ -1,6 +1,7 @@
 class Main():
     title_text = [1, 2]
     dialogue = [21, 2, 7, 92]
+    dialogue_text = [23, 4] 
 
 class Menu():
     new_game = [4, 4]
@@ -12,3 +13,10 @@ class Menu():
 class Field():
     cell_size = [5, 6]
     cell_interval = [4, 5]
+
+class Battle():
+    player_hero = [3, 36, 16, 10]
+    player_units = [[3, 54], [8, 54], [13, 54], [3, 45], [8, 45], [13, 45]]
+    enemy_hero = [3, 81, 16, 10]
+    enemy_units = [[3, 72], [8, 72], [13, 72], [3, 63], [8, 63], [13, 63]]
+    cell_size = [6, 10]

@@ -21,3 +21,5 @@ def draw_rect(r, c, rs, cs, color):
     var.window.addstr(r + rs - 1, c, '#', curses.color_pair(color))
     var.window.addstr(r + rs - 1, c + cs - 1, '#', curses.color_pair(color))
 
+def battle_start():
+    pass

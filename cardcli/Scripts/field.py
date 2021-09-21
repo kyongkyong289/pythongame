@@ -7,6 +7,7 @@ import variables as var
 import uidata as UI
 import colors
 import functions as func
+import dialogue as dial
 
 def display():
     var.window.border('|', '|', '-', '-', '#', '#', '#', '#')
@@ -32,6 +33,7 @@ def display():
 
     if var.Game.state == 'dialogue':
         func.draw_rect(UI.Main.dialogue[0], UI.Main.dialogue[1], UI.Main.dialogue[2], UI.Main.dialogue[3], colors.fg_white)
+        var.window.addstr(UI.Main.dialogue_text[0], UI.Main.dialogue_text[1], dial.data[var.Game.interaction]['contents'][var.Game.interaction_level])
     
 def draw_terrain(r, c, terrain): 
     func.draw_rect(r, c, UI.Field.cell_size[0], UI.Field.cell_size[1], colors.fg_white)
@@ -60,24 +62,28 @@ def draw_player(r, c):
 
 def input_handle(key):
     if var.Game.state == '':
-        if key == 96 + 23 and field.walls[var.Field.location][var.Field.player_position[0] - 1][var.Field.player_position[1]] == 0:
-            var.Field.player_position[0] -= 1
-            var.Camera.position[0] -= UI.Field.cell_interval[0]
+        if key == 96 + 23:
+            if field.walls[var.Field.location][var.Field.player_position[0] - 1][var.Field.player_position[1]] == 0:
+                var.Field.player_position[0] -= 1
+                var.Camera.position[0] -= UI.Field.cell_interval[0]
             var.Field.player_face = 'U'
 
-        elif key == 96 + 19 and field.walls[var.Field.location][var.Field.player_position[0] + 1][var.Field.player_position[1]] == 0:
-            var.Field.player_position[0] += 1
-            var.Camera.position[0] += UI.Field.cell_interval[0]
+        elif key == 96 + 19:
+            if field.walls[var.Field.location][var.Field.player_position[0] + 1][var.Field.player_position[1]] == 0:
+                var.Field.player_position[0] += 1
+                var.Camera.position[0] += UI.Field.cell_interval[0]
             var.Field.player_face = 'D'
 
-        elif key == 96 + 1 and field.walls[var.Field.location][var.Field.player_position[0]][var.Field.player_position[1] - 1] == 0:
-            var.Field.player_position[1] -= 1
-            var.Camera.position[1] -= UI.Field.cell_interval[1]
+        elif key == 96 + 1:
+            if field.walls[var.Field.location][var.Field.player_position[0]][var.Field.player_position[1] - 1] == 0:
+                var.Field.player_position[1] -= 1
+                var.Camera.position[1] -= UI.Field.cell_interval[1]
             var.Field.player_face = 'L'
 
-        elif key == 96 + 4 and field.walls[var.Field.location][var.Field.player_position[0]][var.Field.player_position[1] + 1] == 0:
-            var.Field.player_position[1] += 1
-            var.Camera.position[1] += UI.Field.cell_interval[1]
+        elif key == 96 + 4:
+            if field.walls[var.Field.location][var.Field.player_position[0]][var.Field.player_position[1] + 1] == 0:
+                var.Field.player_position[1] += 1
+                var.Camera.position[1] += UI.Field.cell_interval[1]
             var.Field.player_face = 'R'
 
         elif key == 96 + 5:
@@ -93,9 +99,23 @@ def input_handle(key):
                     if var.Field.player_position[0] == field.interaction[var.Field.location][i][j][0] and var.Field.player_position[1] == field.interaction[var.Field.location][i][j][1] and var.Field.player_face == field.interaction[var.Field.location][i][j][2]:
                         var.Game.state = 'dialogue'
                         var.Game.interaction = field.interaction[var.Field.location][i][4]
-    
+                        var.Game.interaction_level = 0
+
     elif var.Game.state == 'dialogue':
-        pass
+        if key == 96 + 5:
+            if var.Game.interaction_level < len(dial.data[var.Game.interaction]['contents']) - 1:
+                var.Game.interaction_level += 1
+
+        elif key == 96 + 25:
+            if var.Game.interaction_level == len(dial.data[var.Game.interaction]['contents']) - 1:
+                if dial.data[var.Game.interaction]['end_option'][121] == 'battle':
+                    var.Game.scene = 'battle'
+                    func.battle_start()
+
+        elif key == 96 + 14:
+            var.Game.state = ''
+            var.Game.interaction = -1
+            var.Game.interaction_level = -1
         
 def neighbor(pos1, pos2):
     if abs(pos1[0] - pos2[0]) == 0 and abs(pos1[1] - pos2[1]) == 1:
