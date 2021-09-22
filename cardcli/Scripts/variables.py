@@ -33,10 +33,11 @@ class Player():
 class Player_Battle():
     deck = []
     hand = []
+    hand_change = [False, False, False]
 
 class Battle():
     turn = 0
     play_mode = 'card'
     field = []
     player_grave = []
-    enemy_grave= []
+    enemy_grave = []

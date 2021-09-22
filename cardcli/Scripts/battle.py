@@ -22,5 +22,8 @@ def display():
     var.window.addstr(UI.Battle.info_1[0], UI.Battle.info_1[1], '[I] Attack [O] Info [P] Turn end', colors.fg_white)
     var.window.addstr(UI.Battle.info_2[0], UI.Battle.info_2[1], '[Z] Cards  [X] Item [C] Equipment', colors.fg_white)
 
+    # Start Window
+    func.draw_rect(UI.Battle.Start_Window.rect[0], UI.Battle.Start_Window.rect[1], UI.Battle.Start_Window.rect[2], UI.Battle.Start_Window.rect[3], colors.fg_white)
+
 def input_handle(key):
     pass

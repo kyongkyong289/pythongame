@@ -23,3 +23,7 @@ class Battle():
 
     info_1 = [25, 40]
     info_2 = [26, 40]
+
+    class Start_Window():
+        rect = [6, 10, 18, 76]
+        

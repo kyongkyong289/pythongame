@@ -23,6 +23,7 @@ def draw_rect(r, c, rs, cs, color):
 
 def adventure_init():
     var.Player.cards = [10001, 10002, 10003, 10004, 10005]
+    var.Player.deck_1 = [[10001, 0, 2], [10002, 0, 2], [10003, 0, 2], [10004, 0, 2], [10005, 0, 2]]
 
 def battle_start():
     pass
