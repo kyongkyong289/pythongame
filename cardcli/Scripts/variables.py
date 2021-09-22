@@ -20,10 +20,23 @@ class Field():
     player_face = 'D'
 
 class Player():
-    pass
+    inventory = []
+    cards = []
+    deck_1 = []
+    deck_2 = []
+    deck_3 = []
+
+    life = 20
+    level = 1
+    tech = []
 
 class Player_Battle():
-    pass
+    deck = []
+    hand = []
 
 class Battle():
-    pass
+    turn = 0
+    play_mode = 'card'
+    field = []
+    player_grave = []
+    enemy_grave= []

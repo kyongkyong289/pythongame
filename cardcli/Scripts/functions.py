@@ -21,5 +21,8 @@ def draw_rect(r, c, rs, cs, color):
     var.window.addstr(r + rs - 1, c, '#', curses.color_pair(color))
     var.window.addstr(r + rs - 1, c + cs - 1, '#', curses.color_pair(color))
 
+def adventure_init():
+    var.Player.cards = [10001, 10002, 10003, 10004, 10005]
+
 def battle_start():
     pass

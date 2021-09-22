@@ -2,6 +2,7 @@ import uidata as UI
 import variables as var
 import colors
 import curses
+import functions as func
 
 def display():
     var.window.border('|', '|', '-', '-', '#', '#', '#', '#')
@@ -15,6 +16,7 @@ def display():
 def input_handle(key):
     if key == 96 + 5:
         if var.Cursor.menu == 0:
+            func.adventure_init()
             var.Game.scene = 'field'
 
     elif key == 96 + 23 and var.Cursor.menu > 0:
