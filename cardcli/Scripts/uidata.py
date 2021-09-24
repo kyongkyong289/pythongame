@@ -26,4 +26,9 @@ class Battle():
 
     class Start_Window():
         rect = [6, 10, 18, 76]
-        
+
+        start_hand_cursors = [[8, 12], [10, 12], [12, 12], [14, 12]]
+        start_hand_blink = [[8, 13], [10, 13], [12, 13]]
+        start_hand_text = [[8, 14], [10, 14], [12, 14]]
+
+        start_text = [14, 14]

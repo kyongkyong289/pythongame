@@ -26,4 +26,5 @@ def adventure_init():
     var.Player.deck_1 = [[10001, 0, 2], [10002, 0, 2], [10003, 0, 2], [10004, 0, 2], [10005, 0, 2]]
 
 def battle_start():
+    var.Game.state = 'start'
     pass

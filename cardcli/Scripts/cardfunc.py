@@ -4,7 +4,7 @@ import carddata as cards
 def deck_generate_battle(mode):
     var.Player_Battle.deck = []
 
-    if mode == 'adventure':
+    if mode == 'adventure1':
         for i in range(len(var.Player.deck_1)):
             for j in range(var.Player.deck_1[i][2]):
                 tempID = var.Player.deck_1[i][0]
@@ -29,7 +29,7 @@ def draw_from_deck():
 def start_hand_change():
     if len(var.Player_Battle.deck) > 5:
         for i in range(3):
-            if var.Player_Battle.hand_change[i] === True:
+            if var.Player_Battle.hand_change[i] == True:
                 temp = var.Player_Battle.deck[i]
                 var.Player_Battle.deck[i] = var.Player_Battle.deck[i + 3]
                 var.Player_Battle.deck[i + 3] = temp

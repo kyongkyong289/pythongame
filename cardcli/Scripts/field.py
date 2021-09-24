@@ -8,6 +8,7 @@ import uidata as UI
 import colors
 import functions as func
 import dialogue as dial
+import cardfunc as cf
 
 def display():
     var.window.border('|', '|', '-', '-', '#', '#', '#', '#')
@@ -111,6 +112,7 @@ def input_handle(key):
                 if dial.data[var.Game.interaction]['end_option'][121] == 'battle':
                     var.Game.scene = 'battle'
                     func.battle_start()
+                    cf.deck_generate_battle('adventure1')
 
         elif key == 96 + 14:
             var.Game.state = ''
