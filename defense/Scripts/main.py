@@ -11,7 +11,7 @@ import pygame
 pygame.init()
 clock = pygame.time.Clock()
 
-var.screen = pygame.display.set_mode((1024, 768))
+var.screen = pygame.display.set_mode((1024, 640))
 pygame.display.set_caption('Dessert Defense')
 
 def main():
